@@ -166,13 +166,13 @@ body {
     transition: all 0.5s ease 0s;
 }
 .main._bg-novice {
-    background: url("/img/bg/level1.jpg");
+    background: url("../img/bg/level1.jpg");
 }
 .main._bg-warrior {
-    background: url("/img/bg/level2.jpg");
+    background: url("../img/bg/level2.jpg");
 }
 .main._bg-master {
-    background: url("/img/bg/level3.jpg");
+    background: url("../img/bg/level3.jpg");
 }
 .main._bg-novice,
 .main._bg-warrior,

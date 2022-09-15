@@ -35,19 +35,12 @@ body {
     font-family: "MKtitle", sans-serif;
     font-weight: 500;
     margin: 0;
-    background: url("../img/bg/bg_main.jpeg");
     background-color: rgb(0, 0, 0);
-    background-size: cover;
-    background-position: center;
 }
 
 .wrapper {
     height: 100%;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.8);
     position: relative;
 }
 
@@ -62,6 +55,10 @@ body {
     flex-direction: column;
     align-items: center;
     row-gap: 2.5rem;
+    padding: 4.6875rem 0;
+}
+.header._hidden {
+    display: none;
 }
 .header__logo {
     max-width: 37.5rem;
@@ -156,9 +153,6 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     width: 100%;
     height: 100%;
     visibility: hidden;
@@ -172,13 +166,13 @@ body {
     transition: all 0.5s ease 0s;
 }
 .main._bg-novice {
-    background: url("../img/bg/level1.jpg");
+    background: url("/img/bg/level1.jpg");
 }
 .main._bg-warrior {
-    background: url("../img/bg/level2.jpg");
+    background: url("/img/bg/level2.jpg");
 }
 .main._bg-master {
-    background: url("../img/bg/level3.jpg");
+    background: url("/img/bg/level3.jpg");
 }
 .main._bg-novice,
 .main._bg-warrior,
@@ -246,6 +240,7 @@ body {
     flex-wrap: wrap;
     gap: 4.375rem;
     position: relative;
+    padding-bottom: 1.25rem;
 }
 .main__row-player {
     flex: 0 1 19.375rem;
@@ -330,7 +325,8 @@ body {
 .list {
     display: grid;
     gap: 0.625rem;
-    margin: 0 auto 1.875rem;
+    margin: 0 auto;
+    padding: 5rem 0 1.25rem;
 }
 .list._novice-level {
     grid-template-columns: repeat(4, 1fr);
@@ -426,10 +422,5 @@ body {
     .list._master-level {
         grid-template-columns: repeat(4, 1fr);
         max-width: 31.25rem;
-    }
-}
-@media screen and (max-width: 414px) {
-    .list {
-        margin-bottom: 0.9375rem;
     }
 }

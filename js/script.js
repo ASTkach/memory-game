@@ -203,6 +203,7 @@ const mortalCombat = [
 ];
 
 const mainBlock = document.querySelector(".main");
+const header = document.querySelector(".header");
 const list = document.querySelector(".list");
 
 function chosenLevel({ bg, listClass, image }) {
@@ -241,6 +242,7 @@ navList.addEventListener("click", ({ target }) => {
     if (target.parentElement.closest(".button")) {
         target.parentElement.classList.add("_active");
         setTimeout(() => {
+            header.classList.add("_hidden");
             mainBlock.classList.add("_visible");
             list.innerHTML = chosenLevel(mortalCombat.find((item) => item.id === buttonId));
         }, 1100);
@@ -259,10 +261,10 @@ rowSecond.style.width = "100%";
 
 let chosenCards = [];
 let matchCards = [];
+let cardsLocked = false;
 let card;
 let firstCard;
 let secondCard;
-let cardsLocked = false;
 let numOfMatch = 0;
 let playerHealth = 100;
 let iaHealth = 100;

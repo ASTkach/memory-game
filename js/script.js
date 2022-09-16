@@ -260,7 +260,6 @@ rowFirst.style.width = "100%";
 rowSecond.style.width = "100%";
 
 let chosenCards = [];
-let matchCards = [];
 let cardsLocked = false;
 let card;
 let firstCard;
@@ -424,11 +423,7 @@ const countdown = () => {
 };
 
 const resetWin = () => {
-    const itemList = Array.from(document.querySelectorAll(".list__item"));
-
-    matchCards.push(firstCard, secondCard);
-
-    if (matchCards.length === itemList.length) {
+    if (Math.floor(iaHealth) === 0) {
         clearTimeout(count);
         mainImg.classList.add("_tosty");
         setTimeout(() => {

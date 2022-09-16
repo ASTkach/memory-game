@@ -222,6 +222,19 @@ body {
     left: 35%;
     transition: all 0.6s ease 0s;
 }
+.main__img {
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    right: -50%;
+    max-width: 9.375rem;
+    width: 100%;
+    transition: all 0.3s ease 0s;
+}
+.main__img._tosty {
+    right: 35%;
+    transition: all 0.3s ease 0s;
+}
 .main__row {
     display: flex;
     justify-content: center;
@@ -269,21 +282,6 @@ body {
     order: 3;
 }
 
-.hidden__img {
-    position: absolute;
-    z-index: 2;
-    bottom: 0;
-    right: -50%;
-    max-width: 9.375rem;
-    width: 100%;
-    transition: all 0.3s ease 0s;
-}
-
-.hidden__img._tosty {
-    right: 35%;
-    transition: all 0.3s ease 0s;
-}
-
 @media screen and (max-width: 767px) {
     .main__title {
         font-size: 5.625rem;
@@ -292,9 +290,8 @@ body {
         font-size: 1.375rem;
         left: -60%;
     }
-
-    .hidden__img {
-        max-width: 5.625rem;
+    .main__img {
+        max-width: 6.875rem;
     }
 }
 @media screen and (max-width: 745px) {
@@ -421,6 +418,7 @@ body {
 @media screen and (max-width: 767px) {
     .list {
         gap: 0.3125rem;
+        padding-top: 1.25rem;
     }
     .list._warrior-level,
     .list._master-level {

@@ -251,7 +251,7 @@ navList.addEventListener("click", ({ target }) => {
 
 const mainTitle = document.querySelector(".main__title");
 const mainText = document.querySelector(".main__text");
-const mainImg = document.querySelector(".main__img");
+const hiddenImg = document.querySelector(".hidden__img");
 const rowFirst = document.querySelector(".main__row-line--first");
 const rowSecond = document.querySelector(".main__row-line--second");
 const timer = document.querySelector(".main__timer");
@@ -268,10 +268,11 @@ let secondCard;
 let numOfMatch = 0;
 let playerHealth = 100;
 let iaHealth = 100;
-let damage;
+let iaDamage;
+let playerDamage;
 let startCount = false;
 let count;
-let second = 99;
+let second = 60;
 
 const flipCard = ({ target }) => {
     if (cardsLocked) return;
@@ -341,14 +342,15 @@ const noMatch = () => {
 };
 
 const playerHealthLine = () => {
-    playerHealth = playerHealth - 6.25;
+    damagePercentage();
+    playerHealth = playerHealth - playerDamage;
     rowFirst.style.width = `${playerHealth}%`;
     resetLose();
 };
 
 const iaHealthLine = () => {
     damagePercentage();
-    iaHealth = iaHealth - damage;
+    iaHealth = iaHealth - iaDamage;
     rowSecond.style.width = `${iaHealth}%`;
 };
 
@@ -359,52 +361,55 @@ const damageMessage = () => {
         mainText.classList.add("_move");
         mainText.innerHTML = `2 Match
                         </br>
-                        ${Math.floor(damage * 2)}% DAMAGE`;
+                        ${Math.floor(iaDamage * 2)}% DAMAGE`;
     }
 
     if (numOfMatch === 3) {
         mainText.classList.add("_move");
         mainText.innerHTML = `3 Match
                         </br>
-                        ${Math.floor(damage * 3)} DAMAGE`;
+                        ${Math.floor(iaDamage * 3)} DAMAGE`;
     }
 
     if (numOfMatch === 4) {
         mainText.classList.add("_move");
         mainText.innerHTML = `4 Match
                         </br>
-                        ${Math.floor(damage * 4)} DAMAGE`;
+                        ${Math.floor(iaDamage * 4)} DAMAGE`;
     }
 
     if (numOfMatch === 5) {
         mainText.classList.add("_move");
         mainText.innerHTML = `5 Match
                         </br>
-                        ${Math.floor(damage * 5)} DAMAGE`;
+                        ${Math.floor(iaDamage * 5)} DAMAGE`;
     }
 
     if (numOfMatch === 6) {
         mainText.classList.add("_move");
         mainText.innerHTML = `6 Match
                         </br>
-                        ${Math.floor(damage * 6)} DAMAGE`;
+                        ${Math.floor(iaDamage * 6)} DAMAGE`;
     }
 
     if (numOfMatch === 7) {
         mainText.classList.add("_move");
         mainText.innerHTML = `7 Match
                         </br>
-                        ${Math.floor(damage * 7)} DAMAGE`;
+                        ${Math.floor(iaDamage * 7)} DAMAGE`;
     }
 };
 
 const damagePercentage = () => {
     if (list.classList.contains("_novice-level")) {
-        damage = 12.5;
+        playerDamage = 10;
+        iaDamage = 12.5;
     } else if (list.classList.contains("_warrior-level")) {
-        damage = 10;
+        iaDamage = 10;
+        playerDamage = 6.25;
     } else if (list.classList.contains("_master-level")) {
-        damage = 8.333;
+        iaDamage = 8.333;
+        playerDamage = 6.25;
     }
 };
 
@@ -430,11 +435,11 @@ const resetWin = () => {
 
     if (matchCards.length === itemList.length) {
         clearTimeout(count);
-        mainImg.classList.add("_tosty");
+        hiddenImg.classList.add("_tosty");
         setTimeout(() => {
             mainTitle.textContent = `YOU WIN`;
             mainTitle.classList.add("_game-over");
-            mainImg.classList.remove("_tosty");
+            hiddenImg.classList.remove("_tosty");
         }, 1200);
         reloadPage();
     }

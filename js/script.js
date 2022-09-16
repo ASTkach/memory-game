@@ -203,12 +203,13 @@ const mortalCombat = [
 ];
 
 const mainBlock = document.querySelector(".main");
+const main = document.querySelector(".wrapper");
 const header = document.querySelector(".header");
 const list = document.querySelector(".list");
 
 function chosenLevel({ bg, listClass, image }) {
     let dubbleImage = [...image, ...image];
-    bg.map((item) => mainBlock.classList.add(item));
+    bg.map((item) => main.classList.add(item));
     listClass.map((item) => list.classList.add(item));
 
     function shuffle(array) {
@@ -249,6 +250,7 @@ navList.addEventListener("click", ({ target }) => {
     }
 });
 
+const mainAudio = document.querySelector(".main__audio");
 const mainTitle = document.querySelector(".main__title");
 const mainText = document.querySelector(".main__text");
 const mainImg = document.querySelector(".main__img");
@@ -425,11 +427,13 @@ const countdown = () => {
 const resetWin = () => {
     if (Math.floor(iaHealth) === 0) {
         clearTimeout(count);
-        mainImg.classList.add("_tosty");
+        mainImg.classList.add("_toasty");
+        mainAudio.innerHTML = `<audio src="media/toasty.mp3" type="audio/mpeg" autoplay>
+                                 </audio>`;
         setTimeout(() => {
             mainTitle.textContent = `YOU WIN`;
             mainTitle.classList.add("_game-over");
-            mainImg.classList.remove("_tosty");
+            mainImg.classList.remove("_toasty");
         }, 1200);
         reloadPage();
     }

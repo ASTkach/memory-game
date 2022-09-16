@@ -44,6 +44,22 @@ body {
     position: relative;
     overflow-x: hidden;
 }
+.wrapper._bg-novice {
+    background: url("../img/bg/level1.jpg");
+}
+.wrapper._bg-warrior {
+    background: url("../img/bg/level2.jpg");
+}
+.wrapper._bg-master {
+    background: url("../img/bg/level3.jpg");
+}
+.wrapper._bg-novice,
+.wrapper._bg-warrior,
+.wrapper._bg-master {
+    background-size: cover;
+    background-color: black;
+    background-position: center;
+}
 
 .container {
     width: 94%;
@@ -165,22 +181,6 @@ body {
     opacity: 1;
     transition: all 0.5s ease 0s;
 }
-.main._bg-novice {
-    background: url("../img/bg/level1.jpg");
-}
-.main._bg-warrior {
-    background: url("../img/bg/level2.jpg");
-}
-.main._bg-master {
-    background: url("../img/bg/level3.jpg");
-}
-.main._bg-novice,
-.main._bg-warrior,
-.main._bg-master {
-    background-size: cover;
-    background-color: black;
-    background-position: center;
-}
 .main__title {
     position: absolute;
     top: 30%;
@@ -231,9 +231,12 @@ body {
     width: 100%;
     transition: all 0.3s ease 0s;
 }
-.main__img._tosty {
+.main__img._toasty {
     right: 35%;
     transition: all 0.3s ease 0s;
+}
+.main__audio {
+    position: absolute;
 }
 .main__row {
     display: flex;
@@ -327,7 +330,7 @@ body {
     display: grid;
     gap: 0.625rem;
     margin: 0 auto;
-    padding: 5rem 0 2.25rem;
+    padding: 4rem 0 2.25rem;
 }
 .list._novice-level {
     grid-template-columns: repeat(4, 1fr);

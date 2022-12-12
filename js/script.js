@@ -203,13 +203,14 @@ const mortalCombat = [
 ];
 
 const mainBlock = document.querySelector(".main");
-const main = document.querySelector(".wrapper");
+const wrapper = document.querySelector(".wrapper");
 const header = document.querySelector(".header");
 const list = document.querySelector(".list");
 
 function chosenLevel({ bg, listClass, image }) {
-    let dubbleImage = [...image, ...image];
-    bg.map((item) => main.classList.add(item));
+    const dubbleImage = [...image, ...image];
+
+    bg.map((item) => wrapper.classList.add(item));
     listClass.map((item) => list.classList.add(item));
 
     function shuffle(array) {
@@ -218,17 +219,18 @@ function chosenLevel({ bg, listClass, image }) {
             [array[i], array[j]] = [array[j], array[i]];
         }
     }
+
     shuffle(dubbleImage);
 
     return dubbleImage
         .map(
             (item) =>
                 `<li class="list__item" data-match="${item.match}"> 
-                        <div class="list__item-front ${item.frontColor}">
-                        <img src="img/logo/dragon_trans.png" alt="" class="list__img list__img--front" />
+                    <div class="list__item-front ${item.frontColor}">
+                        <img src="img/logo/dragon_trans.png" alt="#" class="list__img list__img--front" />
                     </div>
                     <div class="list__item-back ${item.backColor}">
-                        <img src="${item.fihter}" alt="" class="list__img list__img--back" />
+                        <img src="${item.fihter}" alt="#" class="list__img list__img--back" />
                     </div>
                 </li>  `
         )
@@ -250,7 +252,6 @@ navList.addEventListener("click", ({ target }) => {
     }
 });
 
-const mainAudio = document.querySelector(".main__audio");
 const mainTitle = document.querySelector(".main__title");
 const mainText = document.querySelector(".main__text");
 const mainImg = document.querySelector(".main__img");
@@ -258,21 +259,17 @@ const rowFirst = document.querySelector(".main__row-line--first");
 const rowSecond = document.querySelector(".main__row-line--second");
 const timer = document.querySelector(".main__timer");
 
-rowFirst.style.width = "100%";
-rowSecond.style.width = "100%";
-let chosenCards = [];
 let cardsLocked = false;
 let card;
-let firstCard;
-let secondCard;
+let chosenCards = [];
 let numOfMatch = 0;
 let playerHealth = 100;
 let iaHealth = 100;
-let iaDamage = 6.25;
 let playerDamage;
+let iaDamage = 6.25;
 let startCount = false;
 let count;
-let second = 60;
+let seconds = 60;
 let resultGame = ["YOU WIN", "YOU LOSE", "BORING"];
 [youWin, youLose, boring] = resultGame;
 
@@ -309,6 +306,7 @@ const matchCheck = () => {
     } else {
         noMatch();
     }
+
     chosenCards = [];
 };
 
@@ -344,93 +342,85 @@ const noMatch = () => {
 };
 
 const playerHealthLine = () => {
-    playerHealth = playerHealth - iaDamage;
+    playerHealth -= iaDamage;
     rowFirst.style.width = `${playerHealth}%`;
     resetLose();
 };
 
 const iaHealthLine = () => {
     damagePercentage();
-    iaHealth = iaHealth - playerDamage;
+    iaHealth -= playerDamage;
     rowSecond.style.width = `${iaHealth}%`;
 };
 
 const damageMessage = () => {
     damagePercentage();
 
-    if (numOfMatch === 2) {
-        mainText.classList.add("_move");
-        mainText.innerHTML = `2 Match
-                        </br>
-                        ${Math.floor(playerDamage * 2)}% DAMAGE`;
-    }
-
-    if (numOfMatch === 3) {
-        mainText.classList.add("_move");
-        mainText.innerHTML = `3 Match
-                        </br>
-                        ${Math.floor(playerDamage * 3)} DAMAGE`;
-    }
-
-    if (numOfMatch === 4) {
-        mainText.classList.add("_move");
-        mainText.innerHTML = `4 Match
-                        </br>
-                        ${Math.floor(playerDamage * 4)} DAMAGE`;
-    }
-
-    if (numOfMatch === 5) {
-        mainText.classList.add("_move");
-        mainText.innerHTML = `5 Match
-                        </br>
-                        ${Math.floor(playerDamage * 5)} DAMAGE`;
-    }
-
-    if (numOfMatch === 6) {
-        mainText.classList.add("_move");
-        mainText.innerHTML = `6 Match
-                        </br>
-                        ${Math.floor(playerDamage * 6)} DAMAGE`;
-    }
-
-    if (numOfMatch === 7) {
-        mainText.classList.add("_move");
-        mainText.innerHTML = `7 Match
-                        </br>
-                        ${Math.floor(playerDamage * 7)} DAMAGE`;
+    switch (numOfMatch) {
+        case 2:
+            mainText.classList.add("_move");
+            mainText.innerHTML = `2 Match </br> ${Math.floor(playerDamage * 2)}% DAMAGE`;
+            break;
+        case 3:
+            mainText.classList.add("_move");
+            mainText.innerHTML = `3 Match </br> ${Math.floor(playerDamage * 3)}% DAMAGE`;
+            break;
+        case 4:
+            mainText.classList.add("_move");
+            mainText.innerHTML = `4 Match </br> ${Math.floor(playerDamage * 4)}% DAMAGE`;
+            break;
+        case 5:
+            mainText.classList.add("_move");
+            mainText.innerHTML = `5 Match </br> ${Math.floor(playerDamage * 5)}% DAMAGE`;
+            break;
+        case 6:
+            mainText.classList.add("_move");
+            mainText.innerHTML = `6 Match </br> ${Math.floor(playerDamage * 6)}% DAMAGE`;
+            break;
+        case 7:
+            mainText.classList.add("_move");
+            mainText.innerHTML = `7 Match </br> ${Math.floor(playerDamage * 7)}% DAMAGE`;
+            break;
     }
 };
 
 const damagePercentage = () => {
-    if (list.classList.contains("_novice-level")) {
-        playerDamage = 12.5;
-    } else if (list.classList.contains("_warrior-level")) {
-        playerDamage = 10;
-    } else if (list.classList.contains("_master-level")) {
-        playerDamage = 8.333;
+    let level;
+    switch (list.classList.contains(level)) {
+        case level === "_novice-level":
+            playerDamage = 12.5;
+            break;
+        case level === "_warrior-level":
+            playerDamage = 10;
+            break;
+        case level === "_master-level":
+            playerDamage = 8.333;
+            break;
     }
 };
 
 const countdown = () => {
-    timer.textContent = `${second}`;
-    second--;
+    timer.textContent = `${seconds}`;
+    seconds--;
 
-    if (second < 0) {
+    if (seconds < 0) {
         resetBoring();
     } else {
         count = setTimeout(countdown, 1000);
     }
 
-    if (second < 10) {
-        second = "0" + second;
+    if (seconds < 10) {
+        seconds = "0" + seconds;
     }
 };
 
 const resetWin = () => {
+    let soundeffect = new Audio("media/toasty.mp3");
+
     if (Math.floor(iaHealth) === 0) {
         mainImg.classList.add("_toasty");
-        mainAudio.innerHTML = `<audio src="media/toasty.mp3" type="audio/mpeg" autoplay>
-                                 </audio>`;
+        soundeffect.play();
+
         setTimeout(() => {
             mainImg.classList.remove("_toasty");
         }, 1000);
